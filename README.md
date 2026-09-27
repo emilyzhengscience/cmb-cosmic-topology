@@ -10,7 +10,7 @@
 
 ## Project Overview
 
-Is the universe infinite, or could it be finite but so large that we cannot easily detect its boundaries?
+Is the universe infinite, or could it be finite but so large that we cannot easily detect its global structure?
 
 This project explores whether the **Cosmic Microwave Background (CMB)** can contain information about the global shape, or **topology**, of the universe.
 
@@ -38,15 +38,11 @@ The Cosmic Microwave Background is radiation originating from the early universe
 
 Its temperature is extremely uniform, but small fluctuations occur across the sky:
 
-$$
-T(\theta,\phi)=T_0+\Delta T(\theta,\phi)
-$$
+$$T(\theta,\phi)=T_0+\Delta T(\theta,\phi)$$
 
 with approximately
 
-$$
-\frac{\Delta T}{T}\sim10^{-5}.
-$$
+$$\frac{\Delta T}{T}\sim10^{-5}$$
 
 These tiny temperature variations form the familiar hot and cold "spots" in CMB maps.
 
@@ -56,19 +52,11 @@ They contain information about the physical conditions and structure of the earl
 
 Because the CMB is observed across the celestial sphere, its temperature fluctuations can be represented using spherical harmonics:
 
-$$
-\frac{\Delta T}{T}(\theta,\phi)
-=
-\sum_{\ell,m}a_{\ell m}Y_{\ell m}(\theta,\phi).
-$$
+$$\frac{\Delta T}{T}(\theta,\phi)=\sum_{\ell,m}a_{\ell m}Y_{\ell m}(\theta,\phi)$$
 
 The angular power spectrum is
 
-$$
-C_\ell =
-\frac{1}{2\ell+1}
-\sum_m |a_{\ell m}|^2.
-$$
+$$C_\ell=\frac{1}{2\ell+1}\sum_m |a_{\ell m}|^2$$
 
 The values of $C_\ell$ describe how much temperature variation exists at different angular scales.
 
@@ -80,19 +68,13 @@ An important idea in this project is that **geometry and topology are different*
 
 Ordinary infinite Euclidean space can be represented as
 
-$$
-\mathbb{R}^3.
-$$
+$$\mathbb{R}^3$$
 
 But it is also possible to construct a finite space that is locally flat by identifying periodically separated points:
 
-$$
-(x,y,z)
-\sim
-(x+n_xL,\;y+n_yL,\;z+n_zL).
-$$
+$$(x,y,z)\sim(x+n_xL,\;y+n_yL,\;z+n_zL)$$
 
-Here, $L$ represents the characteristic size of the finite space.
+where $n_x$, $n_y$, and $n_z$ are integers and $L$ represents the characteristic size of the finite space.
 
 This produces a simplified three-dimensional torus-like topology.
 
@@ -102,9 +84,7 @@ Globally, however, it is finite.
 
 Therefore,
 
-$$
-\boxed{\text{local geometry} \neq \text{global topology}}.
-$$
+$$\text{local geometry}\neq\text{global topology}$$
 
 If the universe has this type of topology, periodicity could produce additional correlations between apparently different regions of the CMB sky.
 
@@ -145,7 +125,7 @@ This provides an observational connection between the theoretical problem and th
 
 Python will be used to generate simplified CMB-like random temperature fields.
 
-Two classes of simulations will be compared:
+Two classes of simulations will be compared.
 
 ### Standard Model
 
@@ -159,9 +139,7 @@ Several characteristic topology sizes $L$ will be investigated.
 
 For example:
 
-$$
-L/D = 0.5,\;0.75,\;1.0,\;1.5,\;2.0
-$$
+$$L/D=0.5,\;0.75,\;1.0,\;1.5,\;2.0$$
 
 where $D$ represents an observational scale used in the simulation.
 
@@ -169,20 +147,11 @@ For each simulation, statistical properties will be measured.
 
 One useful quantity is the angular correlation function:
 
-$$
-C(\theta)
-=
-\left\langle
-\Delta T(\hat n_1)
-\Delta T(\hat n_2)
-\right\rangle
-$$
+$$C(\theta)=\left\langle\Delta T(\hat n_1)\Delta T(\hat n_2)\right\rangle$$
 
 where
 
-$$
-\hat n_1\cdot\hat n_2=\cos\theta.
-$$
+$$\hat n_1\cdot\hat n_2=\cos\theta$$
 
 The correlation functions and power spectra of the different simulated universes will then be compared.
 
@@ -192,21 +161,15 @@ The correlation functions and power spectra of the different simulated universes
 
 A simple machine-learning classifier will be trained to determine whether statistical information from a simulated CMB map came from:
 
-$$
-0=\text{standard model}
-$$
+$$0=\text{standard model}$$
 
 or
 
-$$
-1=\text{finite periodic model}.
-$$
+$$1=\text{finite periodic model}$$
 
 Possible input features include low-order power-spectrum values,
 
-$$
-C_2,C_3,\ldots,C_{20},
-$$
+$$C_2,C_3,\ldots,C_{20}$$
 
 together with selected correlation statistics.
 
@@ -219,19 +182,13 @@ A large neural network is not required.
 
 The main result will be a graph showing
 
-$$
-\text{classification accuracy}
-\quad\text{vs.}\quad
-\text{finite-universe scale } L/D.
-$$
+$$\text{classification accuracy versus finite-universe scale }L/D$$
 
 If the finite universe becomes sufficiently large, its observable properties should increasingly resemble those of the standard model.
 
 The classification accuracy should therefore approach random guessing:
 
-$$
-P(\mathrm{correct})\rightarrow0.5.
-$$
+$$P(\mathrm{correct})\rightarrow0.5$$
 
 ---
 
@@ -252,7 +209,7 @@ Download or access public Planck CMB data.
 
 Create Python code to visualize the CMB and examine its basic statistical properties.
 
-**Goal:** produce the first real-CMB plots and understand what the CMB spots represent physically.
+**Goal:** Produce the first real-CMB plots and understand what the CMB spots represent physically.
 
 ---
 
@@ -266,7 +223,7 @@ Generate simulations for several values of $L/D$.
 
 Calculate correlation functions and compare the resulting patterns.
 
-**Goal:** demonstrate computationally that topology can change observable statistical correlations.
+**Goal:** Demonstrate computationally that topology can change observable statistical correlations.
 
 ---
 
@@ -274,11 +231,9 @@ Calculate correlation functions and compare the resulting patterns.
 
 Generate a larger collection of simulated universes.
 
-Extract numerical features such as:
+Extract numerical features such as
 
-$$
-C_2,C_3,\ldots,C_{20}
-$$
+$$C_2,C_3,\ldots,C_{20}$$
 
 and selected correlation statistics.
 
@@ -286,7 +241,7 @@ Train a simple classifier to distinguish standard simulations from finite-topolo
 
 Measure classification performance for different values of $L/D$.
 
-**Goal:** determine when the topology becomes difficult to detect.
+**Goal:** Determine when the topology becomes difficult to detect.
 
 ---
 
@@ -303,7 +258,7 @@ Analyze:
 
 Prepare the final figures, report, presentation, and GitHub documentation.
 
-**Goal:** produce a reproducible computational physics project with clearly stated conclusions and limitations.
+**Goal:** Produce a reproducible computational physics project with clearly stated conclusions and limitations.
 
 ---
 
@@ -313,17 +268,13 @@ For relatively small periodic spaces, the finite-topology simulations are expect
 
 The classifier should therefore distinguish the two simulated models better than random guessing:
 
-$$
-P(\mathrm{correct})>0.5.
-$$
+$$P(\mathrm{correct})>0.5$$
 
 As $L$ increases, the finite topology should become increasingly difficult to observe.
 
 Conceptually,
 
-$$
-L\rightarrow\infty
-$$
+$$L\rightarrow\infty$$
 
 should make the finite model observationally approach the effectively infinite model.
 
@@ -408,17 +359,7 @@ Large Planck data files will not be committed directly to the repository. Instru
 
 By the end of the project, the goal is to be able to explain the chain
 
-$$
-\boxed{
-\text{cosmic topology}
-\rightarrow
-\text{allowed spatial patterns}
-\rightarrow
-\text{CMB correlations}
-\rightarrow
-\text{observable signatures}
-}
-$$
+$$\text{cosmic topology}\rightarrow\text{allowed spatial patterns}\rightarrow\text{CMB correlations}\rightarrow\text{observable signatures}$$
 
 and demonstrate this relationship computationally.
 
