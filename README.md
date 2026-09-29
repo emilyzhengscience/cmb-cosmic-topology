@@ -1,324 +1,331 @@
-# How the Universe Got Its Spots
+# Finding Patterns in the Cosmic Microwave Background
 
-## Exploring Cosmic Topology with the Cosmic Microwave Background
+## A Simple Data Analysis Inspired by Janna Levin
 
 **Student:** Emily Zheng  
-**Project Type:** Computational Physics / Cosmology  
-**Duration:** 4 weeks
+**Project Type:** Physics / Data Analysis / Machine Learning  
+**Duration:** About 4 weeks
 
 ---
 
-## Project Overview
+## Project Idea
 
-Is the universe infinite, or could it be finite but so large that we cannot easily detect its global structure?
+The Cosmic Microwave Background (CMB) is the oldest light we can observe in the universe.
 
-This project explores whether the **Cosmic Microwave Background (CMB)** can contain information about the global shape, or **topology**, of the universe.
+CMB maps contain tiny temperature variations that appear as hot and cold spots across the sky.
 
-The project is inspired by Janna Levin's *How the Universe Got Its Spots* and research on cosmic topology and CMB temperature correlations.
+Janna Levin and collaborators studied whether the **spatial relationships between these spots** could contain information about the structure and topology of the universe.
 
-The central idea is that a universe can be **locally flat but globally finite**. If space has a finite topology, light may effectively encounter repeated regions of space, potentially producing characteristic correlations in the CMB.
+The full theory of cosmic topology is beyond the scope of this project.
 
-Using public CMB data, numerical simulations, statistical analysis, and a simple machine-learning experiment, this project investigates how such signatures might be detected.
+Instead, this project asks a much simpler question:
 
----
+> **Does the real CMB contain measurable spatial patterns that are different from a randomized CMB map?**
 
-## Research Question
-
-> **Can statistical patterns in CMB temperature fluctuations distinguish a standard cosmological model from simplified models representing a finite, periodic universe?**
-
-A secondary question is:
-
-> **As the characteristic size of a finite universe increases, when does its CMB pattern become difficult to distinguish from that of an effectively infinite universe?**
+We will investigate this question using public Planck CMB data, simple statistics, and a small machine-learning experiment.
 
 ---
 
-## Background
+# Main Idea
 
-The Cosmic Microwave Background is radiation originating from the early universe, approximately 380,000 years after the Big Bang.
+Suppose we take the real CMB temperature map and randomly move its temperature values to different locations.
 
-Its temperature is extremely uniform, but small fluctuations occur across the sky:
+The real and randomized maps will still contain exactly the same temperature values.
 
-$$T(\theta,\phi)=T_0+\Delta T(\theta,\phi)$$
+Therefore, they will have approximately the same:
 
-with approximately
+- mean;
+- standard deviation;
+- temperature distribution;
+- histogram.
 
-$$\frac{\Delta T}{T}\sim10^{-5}$$
+But the randomized map will no longer have the original spatial arrangement.
 
-These tiny temperature variations form the familiar hot and cold "spots" in CMB maps.
+This gives us a simple experiment:
 
-They contain information about the physical conditions and structure of the early universe.
+```text
+Real CMB
+same temperature values
+real spatial arrangement
 
-### CMB and Spherical Harmonics
+        vs.
 
-Because the CMB is observed across the celestial sphere, its temperature fluctuations can be represented using spherical harmonics:
+Randomized CMB
+same temperature values
+random spatial arrangement
+```
 
-$$\frac{\Delta T}{T}(\theta,\phi)=\sum_{\ell,m}a_{\ell m}Y_{\ell m}(\theta,\phi)$$
-
-The angular power spectrum is
-
-$$C_\ell=\frac{1}{2\ell+1}\sum_m |a_{\ell m}|^2$$
-
-The values of $C_\ell$ describe how much temperature variation exists at different angular scales.
-
----
-
-## Geometry vs. Topology
-
-An important idea in this project is that **geometry and topology are different**.
-
-Ordinary infinite Euclidean space can be represented as
-
-$$\mathbb{R}^3$$
-
-But it is also possible to construct a finite space that is locally flat by identifying periodically separated points:
-
-$$(x,y,z)\sim(x+n_xL,\;y+n_yL,\;z+n_zL)$$
-
-where $n_x$, $n_y$, and $n_z$ are integers and $L$ represents the characteristic size of the finite space.
-
-This produces a simplified three-dimensional torus-like topology.
-
-Locally, such a universe can still appear flat.
-
-Globally, however, it is finite.
-
-Therefore,
-
-$$\text{local geometry}\neq\text{global topology}$$
-
-If the universe has this type of topology, periodicity could produce additional correlations between apparently different regions of the CMB sky.
+If the two maps behave differently, the difference must come from their **spatial arrangement**, not from their overall temperature distribution.
 
 ---
 
-## Hypothesis
+# Research Question
 
-If the universe has a finite topology with a characteristic size comparable to the observable region, periodicity should introduce additional correlations into simulated CMB temperature patterns.
+> **Does the spatial arrangement of CMB temperature fluctuations contain measurable information?**
 
-Therefore, simplified finite-universe simulations should be statistically distinguishable from ordinary CMB-like simulations when the topology scale is sufficiently small.
+More specifically:
 
-As the size of the finite space increases, these signatures should weaken.
-
-Eventually, the observable region should contain too little information to distinguish a very large finite universe from an infinite universe.
+> **Are neighboring temperatures in the real CMB more structured than we would expect if the same temperature values were randomly arranged?**
 
 ---
 
-# Project Method
+# Hypothesis
 
-The project contains three main components.
+If the real CMB contains spatial structure, nearby temperature measurements should show relationships that disappear when the temperature locations are randomized.
 
-## 1. Explore Real CMB Data
+Therefore:
 
-Publicly available CMB data from the **Planck mission** will be used to study the temperature fluctuations of the real sky.
-
-Python will be used to:
-
-- load and visualize a CMB temperature map;
-- examine hot and cold temperature fluctuations;
-- study the angular power spectrum;
-- calculate or examine large-angle correlations.
-
-This provides an observational connection between the theoretical problem and the actual universe.
+> **Neighboring temperatures in the real CMB should show different similarity from neighboring temperatures in randomized CMB maps.**
 
 ---
 
-## 2. Simulate Finite and Infinite Universes
+# Data
 
-Python will be used to generate simplified CMB-like random temperature fields.
+The project will use public CMB temperature data from the **Planck mission**.
 
-Two classes of simulations will be compared.
+A CMB map contains temperature measurements across the sky.
 
-### Standard Model
+Large Planck data files will not be stored directly in this repository.
 
-A random CMB-like field representing an effectively infinite universe.
+---
 
-### Finite Periodic Model
+# Experiment 1 — Explore the CMB
 
-A field generated with periodic boundary conditions representing a simplified finite topology.
+First, we will load and visualize the real Planck CMB data.
 
-Several characteristic topology sizes $L$ will be investigated.
+We will calculate simple statistics such as:
+
+- mean;
+- standard deviation;
+- minimum and maximum;
+- temperature histogram.
+
+### Output
+
+**Figure 1:** Real Planck CMB map
+
+**Figure 2:** CMB temperature histogram
+
+The purpose of this step is simply to understand the data.
+
+---
+
+# Experiment 2 — Real vs. Randomized CMB
+
+Next, we will randomly shuffle the locations of the CMB temperature values.
 
 For example:
 
-$$L/D=0.5,\;0.75,\;1.0,\;1.5,\;2.0$$
+```text
+Real:
 
-where $D$ represents an observational scale used in the simulation.
+Location A → 12
+Location B → -5
+Location C → 8
 
-For each simulation, statistical properties will be measured.
 
-One useful quantity is the angular correlation function:
+Randomized:
 
-$$C(\theta)=\left\langle\Delta T(\hat n_1)\Delta T(\hat n_2)\right\rangle$$
+Location A → 8
+Location B → 12
+Location C → -5
+```
 
-where
+The temperature values have not changed.
 
-$$\hat n_1\cdot\hat n_2=\cos\theta$$
+Only their locations have changed.
 
-The correlation functions and power spectra of the different simulated universes will then be compared.
+We will verify that the real and randomized maps still have the same temperature histogram.
+
+Then we will measure how similar neighboring temperatures are.
+
+The exact similarity statistic will be kept simple and clearly defined in the analysis.
+
+We will calculate:
+
+```text
+neighbor similarity of real CMB
+```
+
+and compare it with:
+
+```text
+neighbor similarity of randomized CMB
+```
 
 ---
 
-## 3. Machine-Learning Experiment
+# Randomization Test
 
-A simple machine-learning classifier will be trained to determine whether statistical information from a simulated CMB map came from:
+One randomized map could produce an unusual result simply by chance.
 
-$$0=\text{standard model}$$
+Therefore, we will repeat the randomization many times.
 
-or
+For example:
 
-$$1=\text{finite periodic model}$$
+```text
+Randomization 1   → similarity S1
+Randomization 2   → similarity S2
+Randomization 3   → similarity S3
+...
+Randomization 100 → similarity S100
+```
 
-Possible input features include low-order power-spectrum values,
+This produces a distribution showing what we would expect from randomly arranged temperature values.
 
-$$C_2,C_3,\ldots,C_{20}$$
+We can then compare the real CMB result with this random distribution.
 
-together with selected correlation statistics.
+### Output
 
-The project will begin with an interpretable classifier such as:
+**Figure 3:** Real CMB vs. randomized CMB
 
-- logistic regression;
-- random forest.
+**Figure 4:** Distribution of neighbor similarity from randomized maps, with the real CMB result marked on the same graph
 
-A large neural network is not required.
+This is the main experiment of the project.
 
-The main result will be a graph showing
+---
 
-$$\text{classification accuracy versus finite-universe scale }L/D$$
+# Experiment 3 — Simple Machine Learning
 
-If the finite universe becomes sufficiently large, its observable properties should increasingly resemble those of the standard model.
+As a small extension, we will test whether a simple machine-learning model can recognize information contained in spatial relationships.
 
-The classification accuracy should therefore approach random guessing:
+We will use a simple model such as:
 
-$$P(\mathrm{correct})\rightarrow0.5$$
+**Logistic Regression**
+
+The model will try to distinguish data from:
+
+```text
+1 = real CMB spatial arrangement
+0 = randomized spatial arrangement
+```
+
+We will compare two versions of the model.
+
+### Model A — Basic Statistics
+
+Use features such as:
+
+```text
+mean
+standard deviation
+```
+
+### Model B — Add Spatial Information
+
+Use:
+
+```text
+mean
+standard deviation
+neighbor similarity
+```
+
+We will compare the classification accuracy of the two models.
+
+If adding neighbor similarity improves classification, this provides another way to show that spatial arrangement contains information.
+
+### Output
+
+**Figure 5:** Machine-learning accuracy with and without the spatial feature
 
 ---
 
 # Four-Week Plan
 
-## Week 1 — CMB Physics and Real Data
+## Week 1
 
-Learn the basic physics of:
+Learn what the CMB is.
 
-- the Cosmic Microwave Background;
-- temperature anisotropies;
-- spherical harmonics;
-- angular power spectra;
-- geometry versus topology;
-- finite and infinite cosmological models.
+Download and load the Planck data.
 
-Download or access public Planck CMB data.
-
-Create Python code to visualize the CMB and examine its basic statistical properties.
-
-**Goal:** Produce the first real-CMB plots and understand what the CMB spots represent physically.
+Display the CMB map and calculate basic statistics.
 
 ---
 
-## Week 2 — Finite-Space Simulation
+## Week 2
 
-Develop a simplified CMB-like random-field simulation.
+Create randomized CMB maps.
 
-Introduce periodic boundary conditions representing a finite space.
+Define and calculate neighbor similarity.
 
-Generate simulations for several values of $L/D$.
+Repeat the randomization many times.
 
-Calculate correlation functions and compare the resulting patterns.
-
-**Goal:** Demonstrate computationally that topology can change observable statistical correlations.
+Compare the real CMB with the randomized results.
 
 ---
 
-## Week 3 — Statistical Analysis and Machine Learning
+## Week 3
 
-Generate a larger collection of simulated universes.
+Create a small machine-learning dataset.
 
-Extract numerical features such as
+Train a Logistic Regression model.
 
-$$C_2,C_3,\ldots,C_{20}$$
-
-and selected correlation statistics.
-
-Train a simple classifier to distinguish standard simulations from finite-topology simulations.
-
-Measure classification performance for different values of $L/D$.
-
-**Goal:** Determine when the topology becomes difficult to detect.
+Compare classification with and without spatial information.
 
 ---
 
-## Week 4 — Interpretation and Final Report
+## Week 4
 
-Compare the simulated results with selected properties of the real Planck CMB.
+Create final figures.
 
-Analyze:
+Interpret the results.
 
-- what the simulations demonstrate;
-- what the machine-learning model detects;
-- how detectability changes with topology scale;
-- what conclusions cannot be drawn from this simplified experiment.
-
-Prepare the final figures, report, presentation, and GitHub documentation.
-
-**Goal:** Produce a reproducible computational physics project with clearly stated conclusions and limitations.
+Write the project report.
 
 ---
 
 # Expected Results
 
-For relatively small periodic spaces, the finite-topology simulations are expected to contain stronger recognizable correlations.
+We expect the real and randomized CMB maps to have the same overall temperature distribution because they contain the same temperature values.
 
-The classifier should therefore distinguish the two simulated models better than random guessing:
+However, their spatial relationships may be different.
 
-$$P(\mathrm{correct})>0.5$$
+If the real CMB neighbor-similarity value is unusual compared with randomized maps, this would show that:
 
-As $L$ increases, the finite topology should become increasingly difficult to observe.
+> **The arrangement of CMB temperatures contains information that cannot be seen from the temperature histogram alone.**
 
-Conceptually,
-
-$$L\rightarrow\infty$$
-
-should make the finite model observationally approach the effectively infinite model.
-
-The project therefore investigates an important scientific limitation:
-
-> **A universe can be finite even if the observable universe does not contain enough information for us to detect its global topology.**
+If adding spatial information also improves machine-learning classification, it would provide a second demonstration of the same idea.
 
 ---
 
-# Scope and Limitations
+# What Would a Negative Result Mean?
 
-This project does **not** attempt to prove whether the real universe is finite or infinite.
+The expected result may not occur.
 
-A rigorous observational search for cosmic topology requires advanced treatment of:
+If the selected neighbor-similarity measurement does not distinguish the real CMB from randomized maps, that is still a valid result.
 
-- cosmological parameter estimation;
-- foreground contamination;
-- instrumental effects;
-- sky masks;
-- full-sky statistics;
-- topology-specific CMB simulations;
-- observational selection effects.
+It would mean that this particular measurement did not detect spatial structure in the data.
 
-Instead, this project addresses a smaller and testable question:
+It would **not** disprove Janna Levin's research or show that the universe has no nontrivial topology.
 
-> **Can a simplified computational experiment demonstrate how finite topology could create detectable statistical information in CMB-like patterns, and how that information becomes harder to detect as the topology scale increases?**
+---
 
-The Planck data provide a connection to the real universe, but the machine-learning classifier will not be interpreted as proof of the topology of the actual universe.
+# Connection to Janna Levin's Work
+
+Janna Levin and collaborators investigated a much deeper question:
+
+> Could spatial correlations in the CMB contain information about the global topology of the universe?
+
+This project does **not** attempt to answer that question directly.
+
+Instead, it investigates a simpler idea underlying that research:
+
+> **Does spatial arrangement itself contain measurable information in the CMB?**
+
+This allows us to explore an idea motivated by modern cosmology without requiring advanced mathematics or a theoretical model of cosmic topology.
 
 ---
 
 # Tools
 
-The project will primarily use:
-
 - Python
 - Jupyter Notebook
 - NumPy
-- SciPy
 - Matplotlib
-- Healpy / HEALPix
+- Healpy
 - scikit-learn
-- public Planck CMB data
-- Git / GitHub
+- Planck public CMB data
 
 ---
 
@@ -335,56 +342,46 @@ cmb-cosmic-topology/
 │   └── README.md
 │
 ├── notebooks/
-│   ├── 01_real_CMB.ipynb
-│   ├── 02_finite_space_simulation.ipynb
-│   ├── 03_correlation_analysis.ipynb
-│   └── 04_ML_classifier.ipynb
-│
-├── src/
-│   ├── simulation.py
-│   ├── correlations.py
-│   └── features.py
+│   ├── 01_view_CMB.ipynb
+│   ├── 02_real_vs_random.ipynb
+│   └── 03_simple_ML.ipynb
 │
 ├── figures/
 │
 └── docs/
-    └── project_proposal.md
+    └── project_report.md
 ```
-
-Large Planck data files will not be committed directly to the repository. Instructions for obtaining the public data will be provided in `data/README.md`.
 
 ---
 
-# Project Goals
+# Final Goal
 
-By the end of the project, the goal is to be able to explain the chain
+The project should be able to answer one clear question:
 
-$$\text{cosmic topology}\rightarrow\text{allowed spatial patterns}\rightarrow\text{CMB correlations}\rightarrow\text{observable signatures}$$
+> **What information disappears when we keep the CMB temperatures but destroy their spatial arrangement?**
 
-and demonstrate this relationship computationally.
+The goal is not to prove a theory about the shape of the universe.
 
-The project combines **physics, mathematics, astronomical data, numerical simulation, and machine learning** to explore a fundamental question:
-
-> **What can the oldest light in the universe tell us about the shape of space itself?**
+The goal is to use real astronomical data to understand why **spatial patterns and correlations matter** when scientists study the CMB.
 
 ---
 
 ## References
 
-1. Levin, J. *How the Universe Got Its Spots: Diary of a Finite Time in a Finite Space*. Anchor Books.
+1. Levin, J., Scannapieco, E., de Gasperis, G., Silk, J., & Barrow, J. D.  
+   **"How the Universe Got Its Spots."**  
+   *Physical Review D*, 58, 123006 (1998).
 
-2. Levin, J., Scannapieco, E., de Gasperis, G., Silk, J., & Barrow, J. D. "How the Universe Got Its Spots." *Physical Review D* **58**, 123006.
+2. Levin, J.  
+   **"Topology and the Cosmic Microwave Background."**  
+   *Physics Reports*, 365, 251–333 (2002).
 
-3. Levin, J. "Topology and the Cosmic Microwave Background." *Physics Reports* **365**, 251–333.
+3. Levin, J.  
+   *How the Universe Got Its Spots: Diary of a Finite Time in a Finite Space.*
 
-4. Planck Collaboration. Planck mission cosmological results and public CMB data products, European Space Agency.
+4. Planck Collaboration.  
+   Planck mission CMB data products.
 
 ---
 
-## License
-
-This project is released under the **MIT License**.
-
----
-
-*This is a student computational research project. The simulations are intentionally simplified and should not be interpreted as a professional observational constraint on the topology of the universe.*
+*This is a student data-analysis project inspired by research on CMB spatial correlations. It does not attempt to determine the topology of the universe.*
